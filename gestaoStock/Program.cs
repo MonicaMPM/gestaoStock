@@ -1,7 +1,14 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using gestaoStock.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<gestaoStockContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("gestaoStockContext") ?? throw new InvalidOperationException("Connection string 'gestaoStockContext' not found.")));
 
 var app = builder.Build();
 
